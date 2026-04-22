@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>தமிழர் பண்பாடு | Tamil Culture Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Latha&family=Noto+Sans+Tamil:wght@300;400;600;700;900&family=Cinzel+Decorative:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A227;
+    --deep-red: #8B0000;
+    --crimson: #B22222;
+    --saffron: #FF6B00;
+    --dark-bg: #0A0500;
+    --card-bg: #130A00;
+    --card-border: rgba(201,162,39,0.3);
+    --text-gold: #E8C84A;
+    --text-light: #F5E6C8;
+    --text-muted: #A89060;
+    --kolam-red: #C0392B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark-bg);
+    color: var(--text-light);
+    font-family: 'Noto Sans Tamil', sans-serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* CUSTOM SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #0A0500; }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+  /* ANIMATED BACKGROUND */
+  .bg-pattern {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(139,0,0,0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(201,162,39,0.1) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, rgba(255,107,0,0.08) 0%, transparent 50%);
+  }
+
+  .kolam-bg {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.04;
+    background-image: 
+      repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%),
+      repeating-linear-gradient(-45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%);
+    background-size: 30px 30px;
+  }
+
+  /* HEADER */
+  .header {
+    position: relative; z-index: 100;
+    padding: 0 2rem;
+    background: linear-gradient(180deg, rgba(10,5,0,0.98) 0%, rgba(10,5,0,0.9) 100%);
+    border-bottom: 1px solid var(--card-border);
+    backdrop-filter: blur(20px);
+    position: sticky; top: 0;
+  }
+
+  .header-top {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(201,162,39,0.1);
+  }
+
+  .logo-area {
+    display: flex; align-items: center; gap: 1rem;
+  }
+
+  .logo-icon {
+    width: 50px; height: 50px;
+    background: radial-gradient(circle, var(--saffron), var(--deep-red));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 0 20px rgba(255,107,0,0.5);
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(255,107,0,0.5); }
+    50% { box-shadow: 0 0 40px rgba(255,107,0,0.8), 0 0 60px rgba(201,162,39,0.3); }
+  }
+
+  .logo-text { line-height: 1.2; }
+  .logo-text .main { font-size: 1.4rem; font-weight: 900; color: var(--text-gold); letter-spacing: 2px; }
+  .logo-text .sub { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; }
+
+  /* LANGUAGE SWITCHER */
+  .lang-switcher {
+    display: flex; gap: 0.4rem; align-items: center;
+  }
+
+  .lang-btn {
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--card-border);
+    background: transparent;
+    color: var(--text-muted);
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-family: 'Noto Sans Tamil', sans-serif;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+  }
+
+  .lang-btn:hover, .lang-btn.active {
+    background: var(--gold);
+    color: var(--dark-bg);
+    border-color: var(--gold);
+    font-weight: 700;
+    box-shadow: 0 0 15px rgba(201,162,39,0.4);
+  }
+
+  /* NAV */
+  .nav {
+    display: flex; gap: 0; overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    padding: 0.9rem 1.4rem;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-family: 'Noto Sans Tamil', sans-serif;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    position: relative;
+  }
+
+  .nav-btn::after {
+    content: '';
+    position: absolute; bottom: 0; left: 50%; right: 50%;
+    height: 2px; background: var(--gold);
+    transition: all 0.3s ease;
+  }
+
+  .nav-btn:hover, .nav-btn.active {
+    color: var(--text-gold);
+  }
+
+  .nav-btn:hover::after, .nav-btn.active::after {
+    left: 0; right: 0;
+  }
+
+  /* HERO SECTION */
+  .hero {
+    position: relative; z-index: 10;
+    text-align: center;
+    padding: 5rem 2rem 4rem;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(139,0,0,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    padding: 0.3rem 1.2rem;
+    border: 1px solid var(--gold);
+    border-radius: 30px;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    animation: fadeInDown 0.8s ease;
+  }
+
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 900;
+    color: var(--text-gold);
+    text-shadow: 0 0 60px rgba(201,162,39,0.5);
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    animation: fadeInUp 0.8s ease 0.2s both;
+  }
+
+  .hero-title-ta {
+    font-family: 'Noto Sans Tamil', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--saffron), var(--gold), var(--crimson));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    animation: fadeInUp 0.8s ease 0.3s both;
+  }
+
+  .hero-quote {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-style: italic;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    border-left: 3px solid var(--gold);
+    padding-left: 1rem;
+    text-align: left;
+    animation: fadeInUp 0.8s ease 0.4s both;
+  }
+
+  .hero-quote .quote-src { font-size: 0.8rem; color: var(--saffron); margin-top: 0.3rem; }
+
+  /* SLANG TICKER */
+  .slang-ticker {
+    background: linear-gradient(90deg, transparent, rgba(201,162,39,0.15), transparent);
+    border-top: 1px solid var(--card-border);
+    border-bottom: 1px solid var(--card-border);
+    padding: 0.6rem 0;
+    overflow: hidden;
+    position: relative; z-index: 10;
+    margin-bottom: 0;
+  }
+
+  .ticker-inner {
+    display: flex;
+    animation: ticker 40s linear infinite;
+    width: max-content;
+  }
+
+  .ticker-item {
+    padding: 0 2rem;
+    font-size: 0.85rem;
+    color: var(--text-gold);
+    white-space: nowrap;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+
+  .ticker-item .region {
+    font-size: 0.65rem;
+    background: var(--gold);
+    color: var(--dark-bg);
+    padding: 0.1rem 0.4rem;
+    border-radius: 10px;
+    font-weight: 700;
+  }
+
+  .ticker-sep { color: var(--crimson); font-size: 1.2rem; }
+
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* MAIN CONTENT */
+  .main { position: relative; z-index: 10; padding: 2rem; max-width: 1400px; margin: 0 auto; }
+
+  /* SECTION PANELS */
+  .section-panel { display: none; animation: fadeIn 0.5s ease; }
+  .section-panel.active { display: block; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'Noto Sans Tamil', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-gold);
+    margin-bottom: 0.3rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .section-sub {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+  }
+
+  /* CARDS GRID */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(201,162,39,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(201,162,39,0.15);
+  }
+
+  .card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+    filter: drop-shadow(0 0 10px rgba(255,107,0,0.3));
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-gold);
+    margin-bottom: 0.3rem;
+  }
+
+  .card-title-ta {
+    font-size: 0.9rem;
+    color: var(--saffron);
+    margin-bottom: 0.8rem;
+    font-family: 'Noto Sans Tamil', sans-serif;
+  }
+
+  .card-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .card-tag {
+    display: inline-block;
+    margin-top: 0.8rem;
+    padding: 0.2rem 0.6rem;
+    background: rgba(201,162,39,0.1);
+    border: 1px solid rgba(201,162,39,0.2);
+    border-radius: 10px;
+    font-size: 0.7rem;
+    color: var(--gold);
+  }
+
+  /* FEATURED BIG CARD */
+  .featured-card {
+    background: linear-gradient(135deg, #1A0A00, #0D0500);
+    border: 1px solid var(--gold);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .featured-card::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(201,162,39,0.1), transparent 70%);
+    pointer-events: none;
+  }
+
+  .featured-ornament {
+    font-size: 8rem;
+    opacity: 0.15;
+    font-family: 'Noto Sans Tamil', sans-serif;
+    color: var(--gold);
+    text-align: center;
+    line-height: 1;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* STATS ROW */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .stat-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(201,162,39,0.1);
+  }
+
+  .stat-num {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.3rem;
+  }
+
+  /* HERITAGE LINK BUTTON */
+  .heritage-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--deep-red), var(--crimson));
+    border: 1px solid var(--gold);
+    color: var(--text-gold);
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Noto Sans Tamil', sans-serif;
+  }
+
+  .heritage-btn::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(201,162,39,0.2), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+
+  .heritage-btn:hover::before { opacity: 1; }
+  .heritage-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(139,0,0,0.4), 0 0 20px rgba(201,162,39,0.2);
+  }
+
+  .heritage-btn .btn-arrow {
+    transition: transform 0.3s;
+  }
+
+  .heritage-btn:hover .btn-arrow { transform: translateX(4px); }
+
+  /* SLANG CARDS */
+  .slang-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .slang-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s ease;
+    border-left: 3px solid var(--crimson);
+  }
+
+  .slang-card:hover {
+    border-left-color: var(--gold);
+    transform: translateX(4px);
+    box-shadow: 0 0 20px rgba(201,162,39,0.1);
+  }
+
+  .slang-region {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--saffron);
+    margin-bottom: 0.5rem;
+  }
+
+  .slang-word {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-gold);
+    font-family: 'Noto Sans Tamil', sans-serif;
+    margin-bottom: 0.3rem;
+  }
+
+  .slang-meaning {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 2rem 0;
+    position: relative;
+  }
+
+  .divider::after {
+    content: '✦';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--dark-bg);
+    padding: 0 0.5rem;
+    color: var(--gold);
+    font-size: 0.8rem;
+  }
+
+  /* TIMELINE */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--gold), var(--crimson), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute; left: -2.5rem; top: 1.5rem;
+    width: 12px; height: 12px;
+    background: var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--gold);
+  }
+
+  .timeline-item:hover {
+    border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(201,162,39,0.1);
+  }
+
+  .timeline-era {
+    font-size: 0.7rem;
+    color: var(--saffron);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-desc {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* TEMPLE SHOWCASE */
+  .temple-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .temple-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+  }
+
+  .temple-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--gold);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  }
+
+  .temple-img {
+    height: 120px;
+    background: linear-gradient(135deg, #2A1500, #1A0A00);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .temple-img::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.6));
+  }
+
+  .temple-info { padding: 1rem; }
+
+  .temple-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-gold);
+    margin-bottom: 0.2rem;
+    font-family: 'Noto Sans Tamil', sans-serif;
+  }
+
+  .temple-loc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  /* FOOTER */
+  .footer {
+    position: relative; z-index: 10;
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--card-border);
+    background: linear-gradient(180deg, transparent, rgba(10,5,0,0.8));
+  }
+
+  .footer-ta {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    font-family: 'Noto Sans Tamil', sans-serif;
+  }
+
+  .footer-en {
+    font-size: 0.75rem;
+    color: rgba(168,144,96,0.5);
+  }
+
+  /* BACK TO TOP */
+  .back-top {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    width: 48px; height: 48px;
+    background: linear-gradient(135deg, var(--deep-red), var(--crimson));
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--text-gold);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    display: none;
+    align-items: center; justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  }
+
+  .back-top:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(139,0,0,0.4), 0 0 20px rgba(201,162,39,0.2);
+  }
+
+  .back-top.visible { display: flex; animation: fadeIn 0.3s ease; }
+
+  /* LOADING SPINNER FOR LANG SWITCH */
+  .lang-loading {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(10,5,0,0.9);
+    display: none; align-items: center; justify-content: center;
+  }
+
+  .lang-loading.show { display: flex; }
+
+  .spinner {
+    width: 60px; height: 60px;
+    border: 3px solid rgba(201,162,39,0.2);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    font-size: 1.5rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* POEM BLOCK */
+  .poem-block {
+    background: linear-gradient(135deg, rgba(139,0,0,0.1), rgba(201,162,39,0.05));
+    border: 1px solid rgba(201,162,39,0.2);
+    border-left: 4px solid var(--gold);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  .poem-block::before {
+    content: '"';
+    position: absolute; top: -0.5rem; left: 1rem;
+    font-size: 4rem;
+    color: var(--gold);
+    opacity: 0.2;
+    font-family: 'Playfair Display', serif;
+    line-height: 1;
+  }
+
+  .poem-text {
+    font-family: 'Noto Sans Tamil', sans-serif;
+    font-size: 1.1rem;
+    color: var(--text-gold);
+    line-height: 2;
+    text-align: center;
+  }
+
+  .poem-source {
+    text-align: right;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: var(--saffron);
+  }
+
+  /* TWO COL */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .two-col { grid-template-columns: 1fr; }
+    .featured-card { grid-template-columns: 1fr; }
+    .featured-ornament { display: none; }
+    .hero-title { font-size: 1.8rem; }
+    .header-top { flex-direction: column; gap: 0.8rem; }
+  }
+
+  /* HIDDEN CONTENT MULTILANG */
+  [data-lang] { display: none; }
+  [data-lang].visible { display: block; }
+  [data-lang-inline] { display: none; }
+  [data-lang-inline].visible { display: inline; }
+
+  /* GLOW TEXT */
+  .glow { text-shadow: 0 0 20px currentColor; }
+
+  /* BADGE */
+  .badge {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .badge-gold { background: var(--gold); color: var(--dark-bg); }
+  .badge-red { background: var(--crimson); color: white; }
+  .badge-outline { border: 1px solid var(--gold); color: var(--gold); background: transparent; }
+
+  /* ORAL TRADITIONS */
+  .oral-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s;
+  }
+
+  .oral-card:hover { border-color: var(--gold); }
+
+  .oral-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 0.8rem;
+  }
+
+  /* HERO CTA */
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    margin-top: 2rem;
+    animation: fadeInUp 0.8s ease 0.5s both;
+  }
+
+  .btn-primary {
+    padding: 0.8rem 2rem;
+    background: linear-gradient(135deg, var(--deep-red), var(--crimson));
+    border: 1px solid var(--gold);
+    color: var(--text-gold);
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Noto Sans Tamil', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(139,0,0,0.4);
+  }
+
+  .btn-outline {
+    padding: 0.8rem 2rem;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Noto Sans Tamil', sans-serif;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+
+  .btn-outline:hover {
+    background: rgba(201,162,39,0.1);
+    transform: translateY(-2px);
+  }
+
+  /* SHIMMER */
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  .shimmer-text {
+    background: linear-gradient(90deg, var(--gold) 0%, #fff5cc 50%, var(--gold) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s linear infinite;
+  }
+
+  /* ARCHITECTURE COMPONENTS */
+  .arch-list { list-style: none; }
+  .arch-list li {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(201,162,39,0.1);
+    display: flex; align-items: flex-start; gap: 0.8rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .arch-list li:last-child { border-bottom: none; }
+  .arch-list .bullet { color: var(--gold); font-size: 1rem; flex-shrink: 0; }
+
+  /* SEARCH */
+  .search-bar {
+    display: flex; gap: 0.5rem; margin-bottom: 1.5rem;
+  }
+
+  .search-input {
+    flex: 1;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--text-light);
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    font-family: 'Noto Sans Tamil', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .search-input:focus { border-color: var(--gold); }
+  .search-input::placeholder { color: var(--text-muted); }
+
+</style>
+</head>
+<body>
+
+<div class="bg-pattern"></div>
+<div class="kolam-bg"></div>
+
+<!-- LANG LOADING OVERLAY -->
+<div class="lang-loading" id="langLoading">
+  <div class="spinner">🪔</div>
+</div>
+
+<!-- BACK TO TOP -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-top">
+    <div class="logo-area">
+      <div class="logo-icon">🪔</div>
+      <div class="logo-text">
+        <div class="main" id="logoMain">தமிழர் பண்பாடு</div>
+        <div class="sub" id="logoSub">Tamil Culture Dashboard</div>
+      </div>
+    </div>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('ta')" data-l="ta">தமிழ்</button>
+      <button class="lang-btn" onclick="setLang('en')" data-l="en">EN</button>
+      <button class="lang-btn" onclick="setLang('te')" data-l="te">తెలుగు</button>
+      <button class="lang-btn" onclick="setLang('hi')" data-l="hi">हिंदी</button>
+    </div>
+  </div>
+  <nav class="nav" id="mainNav">
+    <button class="nav-btn active" onclick="showSection('home', this)" id="navHome">🏠 முகப்பு</button>
+    <button class="nav-btn" onclick="showSection('panbaadu', this)" id="navPanbaadu">📜 பண்பாடு</button>
+    <button class="nav-btn" onclick="showSection('mozhi', this)" id="navMozhi">🗣️ மொழி</button>
+    <button class="nav-btn" onclick="showSection('kalai', this)" id="navKalai">🎭 கலை</button>
+    <button class="nav-btn" onclick="showSection('kovil', this)" id="navKovil">🏛️ கோயில்</button>
+    <button class="nav-btn" onclick="showSection('vaazhkai', this)" id="navVaazhkai">🌾 வாழ்க்கை</button>
+    <button class="nav-btn" onclick="showSection('vaattam', this)" id="navVaattam">🗺️ வட்டார வழக்கு</button>
+    <button class="nav-btn" onclick="showSection('heritage', this)" id="navHeritage">🏺 Heritage</button>
+  </nav>
+</header>
+
+<!-- SLANG TICKER -->
+<div class="slang-ticker">
+  <div class="ticker-inner" id="tickerInner">
+    <!-- Populated by JS -->
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge" id="heroBadge">✦ 2000+ ஆண்டுகள் பழமை ✦</div>
+  <h1 class="hero-title shimmer-text">Tamil Culture</h1>
+  <div class="hero-title-ta" id="heroTitle">தமிழர் பண்பாடும் கலாச்சாரமும்</div>
+  <div class="hero-quote">
+    <div id="heroQuote">"யாதும் ஊரே யாவரும் கேளிர்; தீதும் நன்றும் பிறர்தர வாரா"</div>
+    <div class="quote-src" id="heroQuoteSrc">— கணியன் பூங்குன்றனார், புறநானூறு</div>
+  </div>
+  <div class="hero-cta">
+    <button class="btn-primary" onclick="showSection('panbaadu', document.getElementById('navPanbaadu'))" id="ctaExplore">பண்பாட்டை அறியுங்கள் →</button>
+    <a href="https://abufirnas-md.github.io/thiru-heritage/" target="_blank" class="btn-outline" id="ctaHeritage">🏺 Heritage தளம்</a>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+  <!-- ========== HOME ========== -->
+  <div class="section-panel active" id="section-home">
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num">2000+</div>
+        <div class="stat-label" id="statYears">ஆண்டுகள் பழமை</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">80M+</div>
+        <div class="stat-label" id="statSpeakers">உலகில் தமிழர்கள்</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">38K+</div>
+        <div class="stat-label" id="statTemples">கோயில்கள்</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">8</div>
+        <div class="stat-label" id="statUNESCO">UNESCO அங்கீகாரம்</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">5</div>
+        <div class="stat-label" id="statTinai">திணை வகை</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- FEATURED -->
+    <div class="featured-card">
+      <div>
+        <div style="margin-bottom:0.5rem;">
+          <span class="badge badge-gold" id="featuredBadge">சிறப்புப் பகுதி</span>
+        </div>
+        <h2 class="section-title" style="font-size:1.5rem; margin-bottom:0.8rem;" id="featuredTitle">தமிழர் பண்பாட்டின் சிறப்பு</h2>
+        <p style="font-size:0.9rem; color: var(--text-muted); line-height:1.8; margin-bottom:1.2rem;" id="featuredDesc">
+          தமிழர் பண்பாடு ஆயிரக்கணக்கான ஆண்டுகளாக வளர்ந்து, சிறந்து விளங்கிய பண்பாட்டு வடிவமாகத் திகழ்கிறது. மொழி, இலக்கியம், கலை, இசை, நடனம், கட்டிடக்கலை, சமூக மரபுகள் என பல்வேறு துறைகளில் உலகப் புகழ் பெற்றது.
+        </p>
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <a href="https://abufirnas-md.github.io/thiru-heritage/" target="_blank" class="heritage-btn" id="herBtn">
+            🏺 <span id="herBtnTxt">திரு பாரம்பரியம் காண்க</span>
+            <span class="btn-arrow">→</span>
+          </a>
+        </div>
+      </div>
+      <div class="featured-ornament">தமிழ்</div>
+    </div>
+
+    <div class="section-title" id="homeOverTitle">📖 அறிமுகம்</div>
+    <p class="section-sub" id="homeOverSub">தமிழ்நாட்டின் பண்பாட்டு அடையாளங்கள்</p>
+
+    <div class="cards-grid">
+      <div class="card">
+        <span class="card-icon">🗣️</span>
+        <div class="card-title" id="c1t">மொழி & இலக்கியம்</div>
+        <div class="card-title-ta">Tamil Language & Literature</div>
+        <div class="card-desc" id="c1d">உலகின் பழமையான மொழிகளில் ஒன்று. சங்க காலம் முதல் இன்று வரை வளர்ந்து வரும் செவ்மொழி. சிலம்புச் செம்மொழி பட்டம் பெற்றது.</div>
+        <span class="card-tag">Classical Language</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">🎭</span>
+        <div class="card-title" id="c2t">கலை & நடனம்</div>
+        <div class="card-title-ta">Art & Dance</div>
+        <div class="card-desc" id="c2d">பரதநாட்டியம், சிற்பக்கலை, ஓவியக்கலை, இசைக்கலை — இவை அனைத்தும் தமிழர் கலை பரம்பரையின் தூண்கள்.</div>
+        <span class="card-tag">Bharatanatyam</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">🏛️</span>
+        <div class="card-title" id="c3t">கட்டிடக்கலை</div>
+        <div class="card-title-ta">Architecture</div>
+        <div class="card-desc" id="c3d">தஞ்சை பெரிய கோயில், மதுரை மீனாட்சி அம்மன் கோயில், ராமேஸ்வரம் கோயில் — உலக பாரம்பரிய இடங்கள்.</div>
+        <span class="card-tag">Dravidian Style</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">🍛</span>
+        <div class="card-title" id="c4t">உணவு கலாசாரம்</div>
+        <div class="card-title-ta">Food Culture</div>
+        <div class="card-desc" id="c4d">அரிசி, பருப்பு, காய்கறிகள் — தமிழர் சமையல் பாரம்பரியம் உலகப் புகழ் பெற்றது. பொங்கல், இட்லி, தோசை உலகெங்கும் அறியப்பட்டவை.</div>
+        <span class="card-tag">Vegitarian Heritage</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">🎪</span>
+        <div class="card-title" id="c5t">பண்டிகைகள்</div>
+        <div class="card-title-ta">Festivals</div>
+        <div class="card-desc" id="c5d">பொங்கல், தீபாவளி, தமிழ் புத்தாண்டு, கார்த்திகை தீபம் — தமிழர் பண்டிகைகள் உற்சாகம் மிகுந்தவை.</div>
+        <span class="card-tag">Pongal • Deepavali</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">⚔️</span>
+        <div class="card-title" id="c6t">வீரமும் வரலாறும்</div>
+        <div class="card-title-ta">History & Valour</div>
+        <div class="card-desc" id="c6d">சேர, சோழ, பாண்டிய, பல்லவர் — தமிழரின் வலிமையான அரசவரலாறும் கடல் வணிகமும் உலகை ஆட்டியது.</div>
+        <span class="card-tag">Chola Empire</span>
+      </div>
+    </div>
+
+    <!-- POEM -->
+    <div class="poem-block">
+      <div class="poem-text">"தமிழன் என்றோர் இனமுண்டு,<br>தனியே அவற்கொரு குணமுண்டு"</div>
+      <div class="poem-source">— நாமக்கல் கவிஞர் இராமலிங்கம்</div>
+    </div>
+
+  </div><!-- end home -->
+
+  <!-- ========== PANBAADU ========== -->
+  <div class="section-panel" id="section-panbaadu">
+    <div class="section-title" id="pbTitle">📜 தமிழர் பண்பாடு</div>
+    <p class="section-sub" id="pbSub">ஆயிரம் ஆண்டுகள் கடந்த பண்பாட்டு பாரம்பரியம்</p>
+
+    <div class="poem-block">
+      <div class="poem-text">"அழுக்காறு அவாவெகுளி இன்னாச்சொல் நான்கும்<br>இழுக்கா இயன்றது அறம்."</div>
+      <div class="poem-source">— திருவள்ளுவர், திருக்குறள்</div>
+    </div>
+
+    <div class="section-title" id="pbArTitle">⏳ வரலாற்று காலகட்டங்கள்</div>
+    <p class="section-sub" style="margin-bottom:1.5rem;" id="pbArSub">தமிழ் வரலாற்றின் முக்கிய கட்டங்கள்</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-era">கி.மு. 300 – கி.பி. 300</div>
+        <div class="timeline-title" id="tl1t">சங்க காலம்</div>
+        <div class="timeline-desc" id="tl1d">தமிழ் இலக்கியத்தின் பொற்காலம். எட்டுத்தொகை, பத்துப்பாட்டு படைக்கப்பட்ட காலம். கணியன் பூங்குன்றனார், திருவள்ளுவர் போன்ற மேதைகள் வாழ்ந்த காலம்.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-era">கி.பி. 300 – 900</div>
+        <div class="timeline-title" id="tl2t">பல்லவர் காலம்</div>
+        <div class="timeline-desc" id="tl2d">மாமல்லபுரம் பாறை கோயில்கள் உருவான காலம். திராவிட கட்டிடக்கலை உச்சம் பெற்றது. கடல் வணிகம் செழித்தது.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-era">கி.பி. 850 – 1279</div>
+        <div class="timeline-title" id="tl3t">சோழர் காலம்</div>
+        <div class="timeline-desc" id="tl3d">தஞ்சை பெரிய கோயில் கட்டப்பட்டது. கரிகால சோழன் கல்லணை உருவாக்கினார். கடல் வழி வணிகம் இலங்கை, மலேசியா வரை பரவியது.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-era">கி.பி. 1200 – 1600</div>
+        <div class="timeline-title" id="tl4t">பாண்டியர் & விஜயநகர காலம்</div>
+        <div class="timeline-desc" id="tl4d">மதுரை மீனாட்சி கோயில் விரிவாக்கம். நாயக்கர் ஆட்சியில் தமிழ் இலக்கியம் மலர்ந்தது. தமிழ் நாடகக் கலை வளர்ச்சி அடைந்தது.</div>
+      </div>
+    </div>
+
+    <div class="section-title" id="pbValTitle">💡 தமிழர் பண்பாட்டு மதிப்பீடுகள்</div>
+    <div class="cards-grid">
+      <div class="card">
+        <span class="card-icon">🤝</span>
+        <div class="card-title" id="val1t">விருந்தோம்பல்</div>
+        <div class="card-title-ta">Hospitality</div>
+        <div class="card-desc" id="val1d">விருந்தினரை கடவுளாக மதித்து உபசரிக்கும் தமிழர் மரபு. "விருந்தோம்பல்" என்பது தமிழர் பண்பாட்டின் சிகரம்.</div>
+      </div>
+      <div class="card">
+        <span class="card-icon">⚖️</span>
+        <div class="card-title" id="val2t">அறநெறி</div>
+        <div class="card-title-ta">Ethics & Dharma</div>
+        <div class="card-desc" id="val2d">திருக்குறளில் கூறப்பட்ட அறவாழ்க்கை. நீதி, நேர்மை, கருணை — தமிழர் வாழ்வின் அடிப்படை.</div>
+      </div>
+      <div class="card">
+        <span class="card-icon">📚</span>
+        <div class="card-title" id="val3t">கல்வி</div>
+        <div class="card-title-ta">Education</div>
+        <div class="card-desc" id="val3d">சங்க காலத்தில் பாடசாலைகள், மடங்கள் மூலம் கல்வி வழங்கப்பட்டது. தொல்காப்பியம், திருக்குறள் போன்ற நூல்கள் கல்வி அடிப்படையாக இருந்தன.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== MOZHI ========== -->
+  <div class="section-panel" id="section-mozhi">
+    <div class="section-title" id="moTitle">🗣️ தமிழ் மொழியும் இலக்கியமும்</div>
+    <p class="section-sub" id="moSub">உலகின் செவ்மொழிகளில் ஒன்று — 2000 ஆண்டுகளுக்கும் மேலான இலக்கியம்</p>
+
+    <div class="two-col">
+      <div>
+        <div class="section-title" style="font-size:1.2rem; margin-bottom:1rem;" id="moLangFact">மொழி சிறப்புகள்</div>
+        <ul class="arch-list">
+          <li><span class="bullet">✦</span><span id="mf1">திராவிட மொழிக் குடும்பத்தில் பழமையானது</span></li>
+          <li><span class="bullet">✦</span><span id="mf2">சிலம்புச் செம்மொழி — UNESCO அங்கீகாரம்</span></li>
+          <li><span class="bullet">✦</span><span id="mf3">தமிழ் லிபி — 12 உயிரெழுத்துகள், 18 மெய்யெழுத்துகள், 1 ஆய்த எழுத்து</span></li>
+          <li><span class="bullet">✦</span><span id="mf4">தமிழில் 30,000+ கல்வெட்டுகள் உள்ளன</span></li>
+          <li><span class="bullet">✦</span><span id="mf5">உலகில் 80 மில்லியனுக்கும் அதிகமான பேசுவோர்</span></li>
+          <li><span class="bullet">✦</span><span id="mf6">சிங்கப்பூர், இலங்கை, மலேசியாவில் ஆட்சி மொழி</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="section-title" style="font-size:1.2rem; margin-bottom:1rem;" id="moLitTitle">முக்கிய இலக்கியங்கள்</div>
+        <div class="oral-card">
+          <div class="oral-header">
+            <span class="card-title" style="font-size:1rem;" id="lit1t">திருக்குறள்</span>
+            <span class="badge badge-gold">திருவள்ளுவர்</span>
+          </div>
+          <div class="card-desc" id="lit1d">133 அதிகாரங்கள், 1330 குறட்பாக்கள். அறம், பொருள், இன்பம் — மூன்று பிரிவுகளில் மனித வாழ்வை வழிநடத்தும் நூல்.</div>
+        </div>
+        <div class="oral-card">
+          <div class="oral-header">
+            <span class="card-title" style="font-size:1rem;" id="lit2t">சிலப்பதிகாரம்</span>
+            <span class="badge badge-red">இளங்கோவடிகள்</span>
+          </div>
+          <div class="card-desc" id="lit2d">கண்ணகி, கோவலன் கதை. தமிழ் இலக்கியத்தின் மகாகாவியம். அறமே வெல்லும் என்ற தத்துவம்.</div>
+        </div>
+        <div class="oral-card">
+          <div class="oral-header">
+            <span class="card-title" style="font-size:1rem;" id="lit3t">தொல்காப்பியம்</span>
+            <span class="badge badge-outline">தொல்காப்பியர்</span>
+          </div>
+          <div class="card-desc" id="lit3d">தமிழ் இலக்கண நூல்களில் பழமையானது. எழுத்ததிகாரம், சொல்லதிகாரம், பொருளதிகாரம் என மூன்று பிரிவுகள்.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== KALAI ========== -->
+  <div class="section-panel" id="section-kalai">
+    <div class="section-title" id="kaTitle">🎭 தமிழர் கலை</div>
+    <p class="section-sub" id="kaSub">சிற்பம், ஓவியம், இசை, நடனம் — தமிழர் கலைவடிவங்கள்</p>
+
+    <div class="cards-grid">
+      <div class="card">
+        <span class="card-icon">💃</span>
+        <div class="card-title" id="ka1t">பரதநாட்டியம்</div>
+        <div class="card-title-ta">Bharatanatyam</div>
+        <div class="card-desc" id="ka1d">தமிழரின் முக்கிய பாரம்பரிய நடனம். தஞ்சை மாவட்டத்தில் மிகுந்த வளர்ச்சி பெற்றது. நட்டுவங்கம், அபினயம், கரணங்கள் — அடிப்படை அம்சங்கள்.</div>
+        <span class="card-tag">Classical Dance</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">🎵</span>
+        <div class="card-title" id="ka2t">கர்நாடக இசை</div>
+        <div class="card-title-ta">Carnatic Music</div>
+        <div class="card-desc" id="ka2d">தென்னிந்திய கருநாடக இசையின் அடிப்படையாக தமிழிசை விளங்குகிறது. யாழ், பறை, கொம்பு, குடம் போன்ற கருவிகள் சங்க காலத்திலேயே பயன்பட்டன.</div>
+        <span class="card-tag">Carnatic • Yaazh</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">🗿</span>
+        <div class="card-title" id="ka3t">சிற்பக்கலை</div>
+        <div class="card-title-ta">Sculpture</div>
+        <div class="card-desc" id="ka3d">பல்லவர், சோழர், பாண்டியர், விஜயநகர காலத்தில் சிற்பக்கலை அபரிமிதமான வளர்ச்சி பெற்றது. மாமல்லபுரம், தஞ்சை — சிற்பக்கலையின் சிகரங்கள்.</div>
+        <span class="card-tag">Pallava • Chola</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">🎨</span>
+        <div class="card-title" id="ka4t">ஓவியக்கலை</div>
+        <div class="card-title-ta">Painting</div>
+        <div class="card-desc" id="ka4d">பழனி கோயில், சிதம்பரம் கோயில், அஜந்தா குகைகளில் தமிழர் ஓவியக்கலையின் புகழ் புலப்படும். நாடகங்களுக்காகவும் ஓவியங்கள் வரையப்பட்டன.</div>
+        <span class="card-tag">Temple Art</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">🎪</span>
+        <div class="card-title" id="ka5t">நாட்டுப்புற கலை</div>
+        <div class="card-title-ta">Folk Arts</div>
+        <div class="card-desc" id="ka5d">தெருக்கூத்து, கதை சொல்லல், கட்டபஞ்சாயத்து, பொம்மலாட்டம் — மக்கள் கலைகள். ஜல்லிக்கட்டு, சிலம்பம், கபடி போன்ற விளையாட்டுகள்.</div>
+        <span class="card-tag">Therukoothu</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">🪆</span>
+        <div class="card-title" id="ka6t">கைவினை கலை</div>
+        <div class="card-title-ta">Handicrafts</div>
+        <div class="card-desc" id="ka6d">பட்டு துணிகள், உலோக வேலைப்பாடுகள், மண்பாண்டங்கள், கஞ்சி வேலை — தமிழர் கைவினை உலகப் புகழ் பெற்றது.</div>
+        <span class="card-tag">Silk • Bronze</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== KOVIL ========== -->
+  <div class="section-panel" id="section-kovil">
+    <div class="section-title" id="koTitle">🏛️ தமிழர் கோயில்கள் & கட்டிடக்கலை</div>
+    <p class="section-sub" id="koSub">திராவிட கட்டிடக்கலையின் சிகரங்கள்</p>
+
+    <div class="temple-grid">
+      <div class="temple-card">
+        <div class="temple-img">🕌</div>
+        <div class="temple-info">
+          <div class="temple-name" id="ko1n">தஞ்சை பெரிய கோயில்</div>
+          <div class="temple-loc">Brihadeeswarar • UNESCO Heritage</div>
+        </div>
+      </div>
+      <div class="temple-card">
+        <div class="temple-img">🏯</div>
+        <div class="temple-info">
+          <div class="temple-name" id="ko2n">மதுரை மீனாட்சி கோயில்</div>
+          <div class="temple-loc">Meenakshi Amman • Madurai</div>
+        </div>
+      </div>
+      <div class="temple-card">
+        <div class="temple-img">⛩️</div>
+        <div class="temple-info">
+          <div class="temple-name" id="ko3n">ராமேஸ்வரம் கோயில்</div>
+          <div class="temple-loc">Rameswaram • Char Dham</div>
+        </div>
+      </div>
+      <div class="temple-card">
+        <div class="temple-img">🗼</div>
+        <div class="temple-info">
+          <div class="temple-name" id="ko4n">மாமல்லபுரம் பாறை கோயில்</div>
+          <div class="temple-loc">Shore Temple • Pallava Era</div>
+        </div>
+      </div>
+      <div class="temple-card">
+        <div class="temple-img">🔱</div>
+        <div class="temple-info">
+          <div class="temple-name" id="ko5n">திருவண்ணாமலை கோயில்</div>
+          <div class="temple-loc">Arunachaleswarar • Annamalai</div>
+        </div>
+      </div>
+      <div class="temple-card">
+        <div class="temple-img">🌊</div>
+        <div class="temple-info">
+          <div class="temple-name" id="ko6n">திருவானைக்கா கோயில்</div>
+          <div class="temple-loc">Jambukeswarar • Tiruchy</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title" id="koArchTitle">🏗️ கட்டிடக்கலை அம்சங்கள்</div>
+    <div class="two-col" style="margin-top:1rem;">
+      <div class="card">
+        <div class="section-title" style="font-size:1rem; margin-bottom:1rem;" id="koCompTitle">கட்டிடக் கூறுகள்</div>
+        <ul class="arch-list">
+          <li><span class="bullet">🔺</span><span><b style="color:var(--text-gold)" id="a1k">கோபுரம்</b> <span id="a1v">— கோயிலின் முக்கியப்பகுதியாக விளங்கும் நுழைவாயில் கோபுரம்</span></span></li>
+          <li><span class="bullet">🔺</span><span><b style="color:var(--text-gold)" id="a2k">விமானம்</b> <span id="a2v">— கருவறைக்கு மேல் அமைந்த உயரமான பகுதி</span></span></li>
+          <li><span class="bullet">🔺</span><span><b style="color:var(--text-gold)" id="a3k">மண்டபம்</b> <span id="a3v">— வழிபாட்டு பகுதி, பக்தர்கள் கூடும் இடம்</span></span></li>
+          <li><span class="bullet">🔺</span><span><b style="color:var(--text-gold)" id="a4k">தீர்த்தக் குளம்</b> <span id="a4v">— கோயில் வளாகத்திற்குள் உள்ள நீர்நிலை</span></span></li>
+          <li><span class="bullet">🔺</span><span><b style="color:var(--text-gold)" id="a5k">வேலைப்பாடுகள்</b> <span id="a5v">— சிற்பங்கள், தூண்கள், ஓவியங்கள்</span></span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="section-title" style="font-size:1rem; margin-bottom:1rem;" id="koWaterTitle">நீர்நிலைகள் & அணைகள்</div>
+        <ul class="arch-list">
+          <li><span class="bullet">💧</span><span id="w1">கரிகால சோழன் கட்டிய கல்லணை — உலகின் பழமையான அணைகளில் ஒன்று</span></li>
+          <li><span class="bullet">💧</span><span id="w2">பாண்டியர்கள் சிறப்பு வாய்ந்த ஏரிகளை, கால்வாய்களை உருவாக்கினர்</span></li>
+          <li><span class="bullet">💧</span><span id="w3">காஞ்சிபுரம், மதுரை, திருவாரூர் — பழமை வாய்ந்த மடங்கள்</span></li>
+          <li><span class="bullet">💧</span><span id="w4">தஞ்சை அரண்மனை, சிவகங்கை, மதுரை நாயக்கர் அரண்மனை</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== VAAZHKAI ========== -->
+  <div class="section-panel" id="section-vaazhkai">
+    <div class="section-title" id="vaTitle">🌾 தமிழர் வாழ்க்கை முறை</div>
+    <p class="section-sub" id="vaSub">குடும்பம், தொழில், உணவு, உடை — தமிழர் வாழ்க்கை</p>
+
+    <div class="cards-grid">
+      <div class="card">
+        <span class="card-icon">👨‍👩‍👧‍👦</span>
+        <div class="card-title" id="va1t">குடும்ப அமைப்பு</div>
+        <div class="card-title-ta">Family Structure</div>
+        <div class="card-desc" id="va1d">பாரம்பரியமாக கூட்டுக்குடும்பம் அதிகளவில் இருந்தது. குடும்பத்தில் பெரியவர்கள் மதிப்பு அடைந்துள்ளனர். திருமணம் ஒரு முக்கிய நிகழ்வாகக் கருதப்படுகிறது.</div>
+      </div>
+      <div class="card">
+        <span class="card-icon">🌾</span>
+        <div class="card-title" id="va2t">விவசாயம்</div>
+        <div class="card-title-ta">Agriculture</div>
+        <div class="card-desc" id="va2d">தமிழர் சமுதாயத்தின் முதன்மைத் தொழில். நெல், பருத்தி, தீர் வரகு போன்ற பயிர்கள் முக்கியமானவை. கரிகால சோழன் நீர்ப்பாசனம் கட்டினார்.</div>
+      </div>
+      <div class="card">
+        <span class="card-icon">🍛</span>
+        <div class="card-title" id="va3t">உணவு மரபு</div>
+        <div class="card-title-ta">Food Heritage</div>
+        <div class="card-desc" id="va3d">அரிசி முக்கிய உணவுப் பொருள். சாதம், இட்லி, தோசை, அப்பம் பிரபலமானவை. பருப்பு, காய்கறிகள், பழங்கள் உணவின் அங்கங்கள்.</div>
+      </div>
+      <div class="card">
+        <span class="card-icon">👘</span>
+        <div class="card-title" id="va4t">உடை & அலங்காரம்</div>
+        <div class="card-title-ta">Attire & Ornaments</div>
+        <div class="card-desc" id="va4d">ஆண்கள் வேஷ்டி, அங்கவஸ்திரம். பெண்கள் சேலை அணிந்தனர். நகைகள் அணிவது பாரம்பரிய மரபாகும் — தொங்கல், தோடுகள், காப்பு.</div>
+      </div>
+      <div class="card">
+        <span class="card-icon">⛵</span>
+        <div class="card-title" id="va5t">வர்த்தகம்</div>
+        <div class="card-title-ta">Trade & Commerce</div>
+        <div class="card-desc" id="va5d">தமிழர்கள் சங்க காலத்திலேயே கடல் மூலமான வர்த்தகத்தில் ஈடுபட்டனர். ரோமாபுரி, சீனா, அரேபியா நாடுகளுடன் வாணிபம் செய்தனர்.</div>
+      </div>
+      <div class="card">
+        <span class="card-icon">🎊</span>
+        <div class="card-title" id="va6t">சமூக மரபுகள்</div>
+        <div class="card-title-ta">Social Traditions</div>
+        <div class="card-desc" id="va6d">பொங்கல், தீபாவளி, தமிழ் புத்தாண்டு, கார்த்திகை தீபம் — பெரும் உற்சாகத்துடன் கொண்டாடப்படும். வைணவம், சைவம் முக்கிய மதங்கள்.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== VAATTAM (DIALECT) ========== -->
+  <div class="section-panel" id="section-vaattam">
+    <div class="section-title" id="vdTitle">🗺️ வட்டார வழக்கு & தமிழ் சிறப்புகள்</div>
+    <p class="section-sub" id="vdSub">நெல்லை, கொவை, ஈழம், பாலக்காடு — வட்டார தமிழின் சுவை</p>
+
+    <div class="poem-block">
+      <div class="poem-text">"தமிழ் ஒரு கடல் — ஒவ்வொரு வட்டாரமும் ஒரு அலை!"</div>
+    </div>
+
+    <div class="slang-grid" id="slangGrid">
+      <!-- Populated by JS -->
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-title" id="vdMoreTitle">🎭 வட்டார சிறப்புகள்</div>
+    <div class="cards-grid">
+      <div class="card">
+        <span class="card-icon">🏔️</span>
+        <div class="card-title" id="vd1t">திருநெல்வேலி தமிழ்</div>
+        <div class="card-title-ta">Tirunelveli Dialect</div>
+        <div class="card-desc" id="vd1d">திருநெல்வேலி வழக்கு தமிழின் மிகப் பழமையான, செழுமையான வட்டாரமொழி. "ஓய்", "டே", "ம்ஹும்" போன்ற சிறப்புச் சொற்கள். ஹல்வா போல் இனிக்கும் ஆனால் கொஞ்சம் கடுகடுப்பும் — அதுவே நெல்லை ஸ்டைல்!</div>
+        <span class="card-tag">நெல்லை • Tirunelveli</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">🌿</span>
+        <div class="card-title" id="vd2t">கொயம்புத்தூர் தமிழ்</div>
+        <div class="card-title-ta">Coimbatore Dialect</div>
+        <div class="card-desc" id="vd2d">கொவை மக்கள் பேசும் தமிழ் மிகவும் நேரடியானது. "என்னாங்க", "சரிதானே", "போங்க" — தொழிலதிபர்களின் நடைமுறை தமிழ். கோவை கோவிந்தன் மார்க்கெட் ஆரஞ்சு போல் ஃப்ரெஷ்!</div>
+        <span class="card-tag">கொவை • Coimbatore</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">🌊</span>
+        <div class="card-title" id="vd3t">ஈழத் தமிழ்</div>
+        <div class="card-title-ta">Eelam Tamil</div>
+        <div class="card-desc" id="vd3d">இலங்கை தமிழர்கள் பேசும் இலக்கிய நெருங்கிய தமிழ். "அடா", "மச்சான்", "ஓடுகிறன்" போன்ற சிறப்பு வழக்குகள். சங்க தமிழின் தூய்மையை கூட்டும் மணம்!</div>
+        <span class="card-tag">ஈழம் • Sri Lanka</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">🌄</span>
+        <div class="card-title" id="vd4t">பாலக்காடு தமிழ்</div>
+        <div class="card-title-ta">Palakkad Tamil</div>
+        <div class="card-desc" id="vd4d">கேரள தமிழர்களின் மொழி — தமிழும் மலையாளமும் கலந்த இனிய கலவை. "எந்த", "ஒன்ன", "சொல்லுவா" — மலையாள நாதத்துடன் தமிழ். மழை நாட்டு மனசு!</div>
+        <span class="card-tag">பாலக்காடு • Palakkad</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== HERITAGE ========== -->
+  <div class="section-panel" id="section-heritage">
+    <div class="section-title" id="htTitle">🏺 திரு பாரம்பரியம்</div>
+    <p class="section-sub" id="htSub">தமிழர் பாரம்பரியத்தை ஆழமாக அறியுங்கள்</p>
+
+    <div class="featured-card" style="margin-bottom:2rem;">
+      <div>
+        <div style="margin-bottom:1rem;">
+          <span class="badge badge-gold">🏺 Heritage Portal</span>
+        </div>
+        <h2 style="font-size:1.5rem; color:var(--text-gold); font-family:'Noto Sans Tamil',sans-serif; margin-bottom:1rem;" id="htFTitle">திரு பாரம்பரியம் தளம்</h2>
+        <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.8; margin-bottom:1.5rem;" id="htFDesc">
+          தமிழர் பாரம்பரியம் பற்றி ஆழமாக அறிய விரும்புவோர் இந்த சிறப்பு தளத்தை பார்வையிடுங்கள். கோயில்கள், சரித்திரம், கலை, இலக்கியம் — அனைத்தும் ஒரே இடத்தில்!
+        </p>
+        <a href="https://abufirnas-md.github.io/thiru-heritage/" target="_blank" class="heritage-btn" style="font-size:1rem; padding:1.2rem 2.5rem;">
+          🏺 <span id="htBtnTxt">திரு பாரம்பரியம் காண்க</span>
+          <span class="btn-arrow">→</span>
+        </a>
+      </div>
+      <div class="featured-ornament" style="font-size:6rem;">🏺</div>
+    </div>
+
+    <div class="section-title" id="htWHTitle">🌍 UNESCO உலக பாரம்பரிய இடங்கள்</div>
+    <div class="cards-grid" style="margin-top:1rem;">
+      <div class="card">
+        <span class="card-icon">🏛️</span>
+        <div class="card-title" id="wh1t">மாமல்லபுரம்</div>
+        <div class="card-title-ta">Mahabalipuram • 1984</div>
+        <div class="card-desc" id="wh1d">பல்லவர் காலத்தில் கட்டப்பட்ட பாறை கோயில்கள் மற்றும் சிற்பங்கள். கடல் கரையோரம் அமைந்த பாரம்பரிய தொகுப்பு.</div>
+        <span class="card-tag">UNESCO 1984</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">🕌</span>
+        <div class="card-title" id="wh2t">தஞ்சை பெரிய கோயில்</div>
+        <div class="card-title-ta">Brihadeeswara • 1987</div>
+        <div class="card-desc" id="wh2d">சோழர் காலத்தில் ராஜராஜ சோழனால் கட்டப்பட்ட உலகப் புகழ் பெற்ற கோயில். திராவிட கட்டிடக்கலையின் உச்சம்.</div>
+        <span class="card-tag">UNESCO 1987</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">💃</span>
+        <div class="card-title" id="wh3t">பரதநாட்டியம்</div>
+        <div class="card-title-ta">Bharatanatyam • UNESCO</div>
+        <div class="card-desc" id="wh3d">தமிழரின் பாரம்பரிய நடன வடிவம் UNESCO அமைப்பால் அங்கீகரிக்கப்பட்டது. உலகின் பழமையான நடன மரபுகளில் ஒன்று.</div>
+        <span class="card-tag">Intangible Heritage</span>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div style="font-size:2rem; margin-bottom:1rem;">🪔</div>
+  <div class="footer-ta" id="footerMain">தமிழ் என்றோர் இனமுண்டு — தனியே அவற்கொரு குணமுண்டு</div>
+  <div class="footer-en" id="footerSub">Tamil Culture Dashboard • Muththarasi Journal • மார்ச்சு 2025</div>
+</footer>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const slangs = [
+  { region: "நெல்லை", regionEn: "Tirunelveli", word: "மாப்ல / டேய்", meaning: "கூடவே பழகுவோரை அழைக்கும் சொல் — அன்பான நட்பின் அடையாளம்!", enMeaning: "Affectionate term for friends/companions", teMeaning: "స్నేహితుడు అని పిలుచుకునే పదం", hiMeaning: "दोस्त को बुलाने का प्यारा तरीका" },
+  { region: "நெல்லை", regionEn: "Tirunelveli", word: "என்ன மேஜை வேலை!", meaning: "எவ்வளவு வித்தியாசமான வேலை! — ஆச்சரியம் அல்லது கோபம் தெரிவிக்க", enMeaning: "What strange business! (surprise/sarcasm)", teMeaning: "ఏమిటీ వింత పని!", hiMeaning: "यह कैसी अजीब बात है!" },
+  { region: "கொவை", regionEn: "Coimbatore", word: "ஒண்ணுமில்லடா ஓய்!", meaning: "பிரச்சனையே இல்ல, நீ கவலைப்படாத! — கொவையர் ஸ்டைல் ரீஷ்யூரன்ஸ்!", enMeaning: "Nothing to worry, it's all fine!", teMeaning: "ఏం కాదు, సందేహించకు!", hiMeaning: "कोई बात नहीं, चिंता मत करो!" },
+  { region: "கொவை", regionEn: "Coimbatore", word: "சீவரை வா!", meaning: "இங்கே வா, இப்பவே! — கொவை அன்றாட வழக்கு", enMeaning: "Come here quickly! — everyday Coimbatore usage", teMeaning: "ఇక్కడికి రా, వెంటనే!", hiMeaning: "यहाँ जल्दी आओ!" },
+  { region: "ஈழம்", regionEn: "Eelam (Sri Lanka)", word: "ஓடுகிறன் / வருகிறன்", meaning: "நான் வருகிறேன் — ஈழத்தமிழரின் செய்யடி அமைப்பு. சங்க தமிழுக்கு நெருங்கியது!", enMeaning: "I am coming — preserves classical Tamil grammar", teMeaning: "నేను వస్తున్నాను", hiMeaning: "मैं आ रहा हूँ" },
+  { region: "ஈழம்", regionEn: "Eelam (Sri Lanka)", word: "அவன் அடா கட்டுமரமா இருக்கான்!", meaning: "அவன் மிகவும் வலிமையான ஆள்! — ஈழத்தமிழ் சொல்லோயி!", enMeaning: "He is a really strong and sturdy person!", teMeaning: "అతడు చాలా బలమైన వ్యక్తి!", hiMeaning: "वह बहुत ताकतवर इंसान है!" },
+  { region: "பாலக்காடு", regionEn: "Palakkad", word: "எந்த கலகலப்பு?", meaning: "என்ன நடக்குது? என்ன விஷயம்? — மலையாள இசையில் தமிழ் கேட்கும் சொல்!", enMeaning: "What's happening? What's going on?", teMeaning: "ఏం జరుగుతోంది?", hiMeaning: "क्या हो रहा है?" },
+  { region: "பாலக்காடு", regionEn: "Palakkad", word: "ஒன்ன கண்டா சந்தோஷம்!", meaning: "உன்னை பார்த்தால் சந்தோஷமாக இருக்கிறது — இனிமையான பாலக்காடு வாழ்த்து!", enMeaning: "Seeing you makes me so happy!", teMeaning: "నిన్ను చూసి సంతోషంగా ఉంది!", hiMeaning: "तुम्हें देखकर बहुत खुशी हुई!" },
+];
+
+const tickerItems = [
+  { region: "நெல்லை", word: "மாப்ல, என்னாச்சு?", meaning: "Hey buddy, what happened?" },
+  { region: "கொவை", word: "சீவரை வாங்க!", meaning: "Come here quick!" },
+  { region: "ஈழம்", word: "ஓடுகிறன் மச்சான்!", meaning: "Coming bro!" },
+  { region: "பாலக்காடு", word: "எந்த கலகலப்பு?", meaning: "What's happening?" },
+  { region: "நெல்லை", word: "தோப்பு கறி சாப்பிட வாய்யா!", meaning: "Come eat the curry!" },
+  { region: "கொவை", word: "ஒண்ணுமில்ல ஓய்!", meaning: "No problem at all!" },
+  { region: "ஈழம்", word: "அடா! நல்லா இருக்கியா?", meaning: "Hey! Are you well?" },
+  { region: "பாலக்காடு", word: "ஒன்ன கண்டா சந்தோஷம்!", meaning: "Happy to see you!" },
+];
+
+// ============================================================
+// MULTILANG DATA
+// ============================================================
+const translations = {
+  ta: {
+    logoMain: "தமிழர் பண்பாடு",
+    logoSub: "Tamil Culture Dashboard",
+    heroBadge: "✦ 2000+ ஆண்டுகள் பழமை ✦",
+    heroTitle: "தமிழர் பண்பாடும் கலாச்சாரமும்",
+    heroQuote: '"யாதும் ஊரே யாவரும் கேளிர்; தீதும் நன்றும் பிறர்தர வாரா"',
+    heroQuoteSrc: "— கணியன் பூங்குன்றனார், புறநானூறு",
+    ctaExplore: "பண்பாட்டை அறியுங்கள் →",
+    ctaHeritage: "🏺 Heritage தளம்",
+    statYears: "ஆண்டுகள் பழமை",
+    statSpeakers: "உலகில் தமிழர்கள்",
+    statTemples: "கோயில்கள்",
+    statUNESCO: "UNESCO அங்கீகாரம்",
+    statTinai: "திணை வகை",
+    featuredBadge: "சிறப்புப் பகுதி",
+    featuredTitle: "தமிழர் பண்பாட்டின் சிறப்பு",
+    featuredDesc: "தமிழர் பண்பாடு ஆயிரக்கணக்கான ஆண்டுகளாக வளர்ந்து, சிறந்து விளங்கிய பண்பாட்டு வடிவமாகத் திகழ்கிறது. மொழி, இலக்கியம், கலை, இசை, நடனம், கட்டிடக்கலை, சமூக மரபுகள் என பல்வேறு துறைகளில் உலகப் புகழ் பெற்றது.",
+    herBtnTxt: "திரு பாரம்பரியம் காண்க",
+    navHome: "🏠 முகப்பு",
+    navPanbaadu: "📜 பண்பாடு",
+    navMozhi: "🗣️ மொழி",
+    navKalai: "🎭 கலை",
+    navKovil: "🏛️ கோயில்",
+    navVaazhkai: "🌾 வாழ்க்கை",
+    navVaattam: "🗺️ வட்டார வழக்கு",
+    navHeritage: "🏺 Heritage",
+    htBtnTxt: "திரு பாரம்பரியம் காண்க",
+  },
+  en: {
+    logoMain: "Tamil Culture",
+    logoSub: "Tamil Culture Dashboard",
+    heroBadge: "✦ 2000+ Years of Heritage ✦",
+    heroTitle: "Tamil Culture & Civilization",
+    heroQuote: '"Every town is my town; every person is my kin; good and evil do not come from others"',
+    heroQuoteSrc: "— Kaniyan Pungundranar, Purananuru",
+    ctaExplore: "Explore Culture →",
+    ctaHeritage: "🏺 Heritage Portal",
+    statYears: "Years of History",
+    statSpeakers: "Tamil Speakers Worldwide",
+    statTemples: "Temples",
+    statUNESCO: "UNESCO Recognitions",
+    statTinai: "Tinai Categories",
+    featuredBadge: "Featured Section",
+    featuredTitle: "The Glory of Tamil Culture",
+    featuredDesc: "Tamil culture has flourished for thousands of years. Language, literature, art, music, dance, architecture, and social traditions have earned world recognition across diverse fields.",
+    herBtnTxt: "Visit Thiru Heritage",
+    navHome: "🏠 Home",
+    navPanbaadu: "📜 Culture",
+    navMozhi: "🗣️ Language",
+    navKalai: "🎭 Arts",
+    navKovil: "🏛️ Temples",
+    navVaazhkai: "🌾 Life",
+    navVaattam: "🗺️ Dialects",
+    navHeritage: "🏺 Heritage",
+    htBtnTxt: "Visit Thiru Heritage",
+  },
+  te: {
+    logoMain: "తమిళ సంస్కృతి",
+    logoSub: "తమిళ కల్చర్ డాష్బోర్డ్",
+    heroBadge: "✦ 2000+ సంవత్సరాల వారసత్వం ✦",
+    heroTitle: "తమిళుల సంస్కృతి & నాగరికత",
+    heroQuote: '"ప్రతి నగరమూ నా నగరమే; ప్రతి మనిషీ నా బంధువే"',
+    heroQuoteSrc: "— కణియన్ పూంగుండ్రనార్",
+    ctaExplore: "సంస్కృతి తెలుసుకోండి →",
+    ctaHeritage: "🏺 హెరిటేజ్ పోర్టల్",
+    statYears: "సంవత్సరాల చరిత్ర",
+    statSpeakers: "ప్రపంచ తమిళులు",
+    statTemples: "దేవాలయాలు",
+    statUNESCO: "UNESCO గుర్తింపు",
+    statTinai: "తినై రకాలు",
+    featuredBadge: "ముఖ్య విభాగం",
+    featuredTitle: "తమిళ సంస్కృతి వైభవం",
+    featuredDesc: "తమిళ సంస్కృతి వేలాది సంవత్సరాలుగా వర్ధిల్లింది. భాష, సాహిత్యం, కళ, సంగీతం, నృత్యం, వాస్తుశిల్పం — అన్నీ ప్రపంచ కీర్తిని పొందాయి.",
+    herBtnTxt: "తిరు హెరిటేజ్ చూడండి",
+    navHome: "🏠 హోమ్",
+    navPanbaadu: "📜 సంస్కృతి",
+    navMozhi: "🗣️ భాష",
+    navKalai: "🎭 కళలు",
+    navKovil: "🏛️ దేవాలయాలు",
+    navVaazhkai: "🌾 జీవనం",
+    navVaattam: "🗺️ మాండలికాలు",
+    navHeritage: "🏺 Heritage",
+    htBtnTxt: "తిరు హెరిటేజ్ చూడండి",
+  },
+  hi: {
+    logoMain: "तमिल संस्कृति",
+    logoSub: "तमिल कल्चर डैशबोर्ड",
+    heroBadge: "✦ 2000+ वर्षों की विरासत ✦",
+    heroTitle: "तमिल संस्कृति और सभ्यता",
+    heroQuote: '"हर नगर मेरा नगर है; हर इंसान मेरा अपना है"',
+    heroQuoteSrc: "— कणियन पूंगुंड्रनार",
+    ctaExplore: "संस्कृति जानिए →",
+    ctaHeritage: "🏺 हेरिटेज पोर्टल",
+    statYears: "वर्षों का इतिहास",
+    statSpeakers: "तमिल भाषी विश्वभर",
+    statTemples: "मंदिर",
+    statUNESCO: "UNESCO मान्यता",
+    statTinai: "तिनई श्रेणी",
+    featuredBadge: "विशेष खंड",
+    featuredTitle: "तमिल संस्कृति का वैभव",
+    featuredDesc: "तमिल संस्कृति हजारों वर्षों से फल-फूल रही है। भाषा, साहित्य, कला, संगीत, नृत्य, वास्तुकला और सामाजिक परंपराएं विश्व प्रसिद्ध हैं।",
+    herBtnTxt: "थिरु हेरिटेज देखें",
+    navHome: "🏠 होम",
+    navPanbaadu: "📜 संस्कृति",
+    navMozhi: "🗣️ भाषा",
+    navKalai: "🎭 कला",
+    navKovil: "🏛️ मंदिर",
+    navVaazhkai: "🌾 जीवन",
+    navVaattam: "🗺️ बोलियाँ",
+    navHeritage: "🏺 Heritage",
+    htBtnTxt: "थिरु हेरिटेज देखें",
+  }
+};
+
+let currentLang = 'ta';
+
+// ============================================================
+// INIT
+// ============================================================
+function init() {
+  buildTicker();
+  buildSlangGrid();
+  setLang('ta');
+  initScrollBtn();
+}
+
+function buildTicker() {
+  const inner = document.getElementById('tickerInner');
+  const allItems = [...tickerItems, ...tickerItems]; // double for seamless
+  inner.innerHTML = allItems.map(item => `
+    <span class="ticker-item">
+      <span class="region">${item.region}</span>
+      ${item.word} — <em style="color:var(--text-muted); font-size:0.75rem;">${item.meaning}</em>
+    </span>
+    <span class="ticker-sep">❧</span>
+  `).join('');
+}
+
+function buildSlangGrid() {
+  const grid = document.getElementById('slangGrid');
+  grid.innerHTML = slangs.map(s => `
+    <div class="slang-card">
+      <div class="slang-region">${s.region} • ${s.regionEn}</div>
+      <div class="slang-word">${s.word}</div>
+      <div class="slang-meaning" id="sm-${s.word.replace(/\s/g,'_').replace(/[^\w]/g,'')}">${s.meaning}</div>
+    </div>
+  `).join('');
+}
+
+function updateSlangMeanings(lang) {
+  slangs.forEach(s => {
+    const key = s.word.replace(/\s/g,'_').replace(/[^\w]/g,'');
+    const el = document.getElementById('sm-' + key);
+    if (!el) return;
+    if (lang === 'ta') el.textContent = s.meaning;
+    else if (lang === 'en') el.textContent = s.enMeaning;
+    else if (lang === 'te') el.textContent = s.teMeaning;
+    else if (lang === 'hi') el.textContent = s.hiMeaning;
+  });
+}
+
+function setLang(lang) {
+  currentLang = lang;
+  const loader = document.getElementById('langLoading');
+  loader.classList.add('show');
+
+  setTimeout(() => {
+    const t = translations[lang];
+    // Update all keyed elements
+    Object.entries(t).forEach(([key, val]) => {
+      const el = document.getElementById(key);
+      if (el) el.textContent = val;
+    });
+
+    // Update slang meanings
+    updateSlangMeanings(lang);
+
+    // Update lang buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.l === lang);
+    });
+
+    loader.classList.remove('show');
+  }, 300);
+}
+
+function showSection(id, btn) {
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('section-' + id).classList.add('active');
+  if (btn) btn.classList.add('active');
+  // Scroll to main
+  document.querySelector('.main').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function initScrollBtn() {
+  const btn = document.getElementById('backTop');
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  });
+}
+
+window.addEventListener('load', init);
+</script>
+</body>
+</html>
